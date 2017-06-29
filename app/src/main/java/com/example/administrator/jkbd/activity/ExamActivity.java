@@ -1,8 +1,10 @@
-package com.example.administrator.jkbd;
+package com.example.administrator.jkbd.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.administrator.jkbd.R;
 
 /**
  * Created by Administrator on 2017/6/29.
