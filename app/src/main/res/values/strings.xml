@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">JKBD</string>
+    <string name="exam_title">"考试科目:C1\n""考题数量:100\n""考试时间:10\n" </string>
+    <string name="exam_num">1.</string>
+    <string name="exam_question">这个标志是何含义?</string>
 </resources>
