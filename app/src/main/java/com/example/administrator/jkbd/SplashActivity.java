@@ -12,9 +12,10 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public class SplashActivity extends AppCompatActivity {
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         cdt.start();
     }
