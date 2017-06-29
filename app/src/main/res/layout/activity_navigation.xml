@@ -17,7 +17,8 @@
         android:layout_weight="1"
         android:background="@null"
         android:drawableTop="@mipmap/main_menu_exam"
-        android:text="随机测试"/>
+        android:text="随机测试"
+        android:onClick="Test"/>
 
     <Button
         android:id="@+id/button2"
@@ -50,6 +51,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:drawableTop="@mipmap/main_menu_exit"
-            android:text="退出" />
+            android:text="退出"
+            android:onClick="Exit"/>
     </LinearLayout>
 </LinearLayout>
