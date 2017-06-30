@@ -23,8 +23,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ExamActivity"
-            >
-        </activity>
+        >
+            </activity>
+
     </application>
 
 </manifest>

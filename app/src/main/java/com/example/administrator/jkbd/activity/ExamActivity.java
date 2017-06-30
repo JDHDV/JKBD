@@ -10,6 +10,7 @@ import com.example.administrator.jkbd.ExamApplication;
 import com.example.administrator.jkbd.R;
 import com.example.administrator.jkbd.bean.ExamInfo;
 import com.example.administrator.jkbd.bean.Question;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -33,9 +34,21 @@ public class ExamActivity extends AppCompatActivity{
         if(examInfo!=null){
             showData(examInfo);
         }
-        List<Question> examlist=ExamApplication.getInstance().getExamList();
-        if(examlist!=null){
+        List<Question> examList=ExamApplication.getInstance().getExamList();
+        if(examList!=null){
+                  showExam(examList);
+        }
+    }
 
+    private void showExam(List<Question> examList) {
+        Question que=examList.get(0);
+        if(que!=null){
+            tvextitle.setText(que.getQuestion());
+            tvop1.setText(que.getItem1());
+            tvop2.setText(que.getItem2());
+            tvop3.setText(que.getItem3());
+            tvop4.setText(que.getItem4());
+            Picasso.with(ExamActivity.this).load(que.getUrl()).into(imview);
         }
     }
 
