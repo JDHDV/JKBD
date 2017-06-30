@@ -36,6 +36,7 @@
             android:textColor="#000"
             android:textSize="20dp"/>
         <TextView
+            android:id="@+id/tv_exam_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="@string/exam_question"
@@ -43,6 +44,7 @@
             android:textSize="20dp"/>
     </LinearLayout>
 <ImageView
+    android:id="@+id/im_exam_image"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
@@ -60,6 +62,7 @@
             android:textSize="18dp"
             android:layout_marginLeft="20dp"/>
         <TextView
+            android:id="@+id/tv_op1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="车道数变少"
@@ -80,6 +83,7 @@
             android:textSize="18dp"
             android:layout_marginLeft="20dp"/>
         <TextView
+            android:id="@+id/tv_op2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="合流处"
@@ -100,6 +104,7 @@
             android:textSize="18dp"
             android:layout_marginLeft="20dp"/>
         <TextView
+            android:id="@+id/tv_op3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="应急车道"
@@ -120,6 +125,7 @@
             android:textSize="18dp"
             android:layout_marginLeft="20dp"/>
         <TextView
+            android:id="@+id/tv_op4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="向左变道"
