@@ -46,7 +46,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:src="@mipmap/exam_title"/>
+    android:src="@mipmap/p3"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,13 +57,15 @@
             android:layout_height="wrap_content"
             android:text="A."
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="车道数变少"
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,15 +77,16 @@
             android:layout_height="wrap_content"
             android:text="B."
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="合流处"
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"/>
     </LinearLayout>
-    android:src="@mipmap/exam_title"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -94,31 +97,35 @@
             android:layout_height="wrap_content"
             android:text="C."
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="应急车道"
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="8dp">
+        android:layout_margin="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="D."
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="向左变道"
             android:textColor="#000"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -127,7 +134,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="75dp"
             android:text="A"/>
         <CheckBox
             android:layout_width="wrap_content"
@@ -155,7 +162,9 @@
             android:background="@null"
             android:drawableLeft="@mipmap/exam_pre32x32"
             android:text="上一题"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"/>
         <Button
             android:id="@+id/btn_next"
             android:layout_width="wrap_content"
@@ -163,7 +172,9 @@
             android:background="@null"
             android:drawableRight="@mipmap/exam_next32x32"
             android:text="下一题"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -171,6 +182,8 @@
             android:layout_below="@id/btn_next"
             android:drawableRight="@mipmap/exam_commit32x32"
             android:text="交卷"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            />
     </RelativeLayout>
 </LinearLayout>
