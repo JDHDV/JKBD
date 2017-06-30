@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     public  void  Test(View view){
         OkHttpUtils<ExamInfo> utils=new OkHttpUtils<>(getApplicationContext());
-        String uri="http://101.251.196.90:8080/JztkServer/examInfo";
-        utils.url(uri).targetClass(ExamInfo.class)
+        String url1="http://101.251.196.90:8080/JztkServer/examInfo";
+        utils.url(url1).targetClass(ExamInfo.class)
                 .execute(new OkHttpUtils.OnCompleteListener<ExamInfo>() {
                     @Override
                     public void onSuccess(ExamInfo result) {
