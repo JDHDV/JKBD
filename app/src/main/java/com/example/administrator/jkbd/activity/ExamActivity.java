@@ -108,7 +108,7 @@ public class ExamActivity extends AppCompatActivity {
             tvop2.setText(que.getItem2());
             tvop3.setText(que.getItem3());
             tvop4.setText(que.getItem4());
-            if(que.getUrl()!=null&&que.getUrl().equals("")) {
+            if(que.getUrl()!=null&&!que.getUrl().equals("")) {
                 imview.setVisibility(View.VISIBLE);
                 Picasso.with(ExamActivity.this).load(que.getUrl()).into(imview);
             }else {
