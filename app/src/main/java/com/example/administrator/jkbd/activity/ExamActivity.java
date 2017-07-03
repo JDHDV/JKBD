@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.administrator.jkbd.ExamApplication;
@@ -26,11 +29,15 @@ import java.util.List;
  */
 
 public class ExamActivity extends AppCompatActivity {
-    TextView tvexif, tvextitle, tvop1, tvop2, tvop3, tvop4;
+    TextView tvexif, tvextitle, tvop1, tvop2, tvop3, tvop4,tvload;
     ImageView imview;
+    LinearLayout layoutloading;
+    ProgressBar dialog;
     IExamBiz biz;
-    boolean loadisExanInfo = false;
+    boolean loadisExamInfo = false;
     boolean loadisQuestion = false;
+    boolean loadisExamInfoReceive = false;
+    boolean loadisQuestionReceive = false;
     LoadExamBroadCast loadexambrodcast;
     LoadQuestionBroadCast loadquestionbrodcast;
 
@@ -40,6 +47,7 @@ public class ExamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_examstart);
         loadexambrodcast=new LoadExamBroadCast();
         loadquestionbrodcast=new LoadQuestionBroadCast();
+        biz = new ExamBiz();
         setListener();
         initView();
         loadData();
@@ -62,7 +70,9 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     public void loadData() {
-        biz = new ExamBiz();
+        layoutloading.setEnabled(false);
+        dialog.setVisibility(View.VISIBLE);
+        tvload.setText("数据下载中...");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -72,17 +82,26 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        if (loadisExanInfo && loadisQuestion) {
-            ExamInfo examInfo = ExamApplication.getInstance().getExamInfo();
-            if (examInfo != null) {
-                showData(examInfo);
-            }
-            List<Question> examList = ExamApplication.getInstance().getExamList();
-            if (examList != null) {
-                showExam(examList);
-            }
-        }
+     if (loadisExamInfoReceive&&loadisQuestionReceive){
+         if (loadisExamInfo && loadisQuestion) {
+             layoutloading.setVisibility(View.GONE);
+             ExamInfo examInfo = ExamApplication.getInstance().getExamInfo();
+             if (examInfo != null) {
+                 showData(examInfo);
+             }
+             List<Question> examList = ExamApplication.getInstance().getExamList();
+             if (examList != null) {
+                 showExam(examList);
+             }
+         }
+         else {
+             layoutloading.setEnabled(true);
+             dialog.setVisibility(View.GONE);
+             tvload.setText("下载失败，点击重新下载！");
+         }
+     }
     }
+
 
     private void showExam(List<Question> examList) {
         Question que = examList.get(0);
@@ -107,7 +126,17 @@ public class ExamActivity extends AppCompatActivity {
         tvop2 = (TextView) findViewById(R.id.tv_op2);
         tvop3 = (TextView) findViewById(R.id.tv_op3);
         tvop4 = (TextView) findViewById(R.id.tv_op4);
+        tvload=(TextView)findViewById(R.id.tv_load);
         imview = (ImageView) findViewById(R.id.im_exam_image);
+        layoutloading=(LinearLayout)findViewById(R.id.layout_loading);
+        dialog=(ProgressBar)findViewById(R.id.load_dialog);
+        layoutloading.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                loadData();;
+            }
+        });
     }
 
     class LoadExamBroadCast extends BroadcastReceiver {
@@ -117,8 +146,9 @@ public class ExamActivity extends AppCompatActivity {
             boolean isSuccess = intent.getBooleanExtra(ExamApplication.LOAD_DATA_SUCCESS, false);
             Log.e("LoadExamBroadcast","LoadExamBroadcast,isSuccess="+isSuccess);
             if (isSuccess) {
-                loadisExanInfo = true;
+                loadisExamInfo = true;
             }
+            loadisExamInfoReceive=true;
             initData();
         }
     }
@@ -132,6 +162,7 @@ public class ExamActivity extends AppCompatActivity {
             if (isSuccess) {
                 loadisQuestion = true;
             }
+            loadisQuestionReceive=true;
             initData();
         }
     }
