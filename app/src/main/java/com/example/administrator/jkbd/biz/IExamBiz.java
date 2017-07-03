@@ -1,12 +1,16 @@
 package com.example.administrator.jkbd.biz;
 
+import com.example.administrator.jkbd.bean.Question;
+
 /**
  * Created by Administrator on 2017/6/30.
  */
 
 public interface IExamBiz {
     void beginExam();
-    void nextQuestion();
-    void preQuestion();
+    Question getExam();
+    Question nextQuestion();
+    Question preQuestion();
     void commitExam();
+    String getExamIndex();
 }

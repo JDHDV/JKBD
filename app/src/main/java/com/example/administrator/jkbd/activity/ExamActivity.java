@@ -29,7 +29,7 @@ import java.util.List;
  */
 
 public class ExamActivity extends AppCompatActivity {
-    TextView tvexif, tvextitle, tvop1, tvop2, tvop3, tvop4,tvload;
+    TextView tvexif, tvextitle, tvop1, tvop2, tvop3, tvop4,tvload,tvnum;
     ImageView imview;
     LinearLayout layoutloading;
     ProgressBar dialog;
@@ -89,10 +89,7 @@ public class ExamActivity extends AppCompatActivity {
              if (examInfo != null) {
                  showData(examInfo);
              }
-             List<Question> examList = ExamApplication.getInstance().getExamList();
-             if (examList != null) {
-                 showExam(examList);
-             }
+                 showExam( biz.getExam());
          }
          else {
              layoutloading.setEnabled(true);
@@ -103,15 +100,20 @@ public class ExamActivity extends AppCompatActivity {
     }
 
 
-    private void showExam(List<Question> examList) {
-        Question que = examList.get(0);
-        if (que != null) {
+    private void showExam(Question que) {
+        if (que!= null) {
+            tvnum.setText(biz.getExamIndex());
             tvextitle.setText(que.getQuestion());
             tvop1.setText(que.getItem1());
             tvop2.setText(que.getItem2());
             tvop3.setText(que.getItem3());
             tvop4.setText(que.getItem4());
-            Picasso.with(ExamActivity.this).load(que.getUrl()).into(imview);
+            if(que.getUrl()!=null&&que.getUrl().equals("")) {
+                imview.setVisibility(View.VISIBLE);
+                Picasso.with(ExamActivity.this).load(que.getUrl()).into(imview);
+            }else {
+                imview.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -127,6 +129,7 @@ public class ExamActivity extends AppCompatActivity {
         tvop3 = (TextView) findViewById(R.id.tv_op3);
         tvop4 = (TextView) findViewById(R.id.tv_op4);
         tvload=(TextView)findViewById(R.id.tv_load);
+        tvnum= (TextView) findViewById(R.id.tv_examnum);
         imview = (ImageView) findViewById(R.id.im_exam_image);
         layoutloading=(LinearLayout)findViewById(R.id.layout_loading);
         dialog=(ProgressBar)findViewById(R.id.load_dialog);
@@ -134,9 +137,17 @@ public class ExamActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                loadData();;
+                loadData();
             }
         });
+    }
+
+    public void perExam(View view) {
+        showExam(biz.preQuestion());
+    }
+
+    public void nextExam(View view) {
+        showExam(biz.nextQuestion());
     }
 
     class LoadExamBroadCast extends BroadcastReceiver {

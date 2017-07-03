@@ -51,6 +51,7 @@
         android:orientation="horizontal"
         android:layout_margin="20dp">
         <TextView
+            android:id="@+id/tv_examnum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/exam_num"
@@ -189,6 +190,7 @@
             android:background="@null"
             android:drawableLeft="@mipmap/exam_pre32x32"
             android:text="上一题"
+            android:onClick="perExam"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"/>
@@ -199,6 +201,7 @@
             android:background="@null"
             android:drawableRight="@mipmap/exam_next32x32"
             android:text="下一题"
+            android:onClick="nextExam"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:layout_marginTop="30dp"/>
