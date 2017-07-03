@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -31,8 +33,10 @@ import java.util.List;
 public class ExamActivity extends AppCompatActivity {
     TextView tvexif, tvextitle, tvop1, tvop2, tvop3, tvop4,tvload,tvnum;
     ImageView imview;
-    LinearLayout layoutloading;
+    LinearLayout layoutloading,layout03,layout04;
     ProgressBar dialog;
+    CheckBox cb01,cb02,cb03,cb04;
+    CheckBox[] cbs=new CheckBox[4];
     IExamBiz biz;
     boolean loadisExamInfo = false;
     boolean loadisQuestion = false;
@@ -108,6 +112,10 @@ public class ExamActivity extends AppCompatActivity {
             tvop2.setText(que.getItem2());
             tvop3.setText(que.getItem3());
             tvop4.setText(que.getItem4());
+            layout03.setVisibility(que.getItem3().equals("")?View.GONE:View.VISIBLE);
+            cb03.setVisibility(que.getItem3().equals("")?View.GONE:View.VISIBLE);
+            layout04.setVisibility(que.getItem4().equals("")?View.GONE:View.VISIBLE);
+            cb04.setVisibility(que.getItem4().equals("")?View.GONE:View.VISIBLE);
             if(que.getUrl()!=null&&!que.getUrl().equals("")) {
                 imview.setVisibility(View.VISIBLE);
                 Picasso.with(ExamActivity.this).load(que.getUrl()).into(imview);
@@ -130,8 +138,18 @@ public class ExamActivity extends AppCompatActivity {
         tvop4 = (TextView) findViewById(R.id.tv_op4);
         tvload=(TextView)findViewById(R.id.tv_load);
         tvnum= (TextView) findViewById(R.id.tv_examnum);
+        cb01= (CheckBox) findViewById(R.id.cb01);
+        cb02= (CheckBox) findViewById(R.id.cb02);
+        cb03= (CheckBox) findViewById(R.id.cb03);
+        cb04= (CheckBox) findViewById(R.id.cb04);
+        cbs[0]=cb01;
+        cbs[1]=cb02;
+        cbs[2]=cb03;
+        cbs[3]=cb04;
         imview = (ImageView) findViewById(R.id.im_exam_image);
         layoutloading=(LinearLayout)findViewById(R.id.layout_loading);
+        layout03=(LinearLayout)findViewById(R.id.layout03);
+        layout04=(LinearLayout)findViewById(R.id.layout04);
         dialog=(ProgressBar)findViewById(R.id.load_dialog);
         layoutloading.setOnClickListener(new View.OnClickListener(){
 
@@ -140,7 +158,41 @@ public class ExamActivity extends AppCompatActivity {
                 loadData();
             }
         });
+        cb01.setOnCheckedChangeListener(Listener);
+        cb02.setOnCheckedChangeListener(Listener);
+        cb03.setOnCheckedChangeListener(Listener);
+        cb04.setOnCheckedChangeListener(Listener);
     }
+
+      CompoundButton.OnCheckedChangeListener Listener=new  CompoundButton.OnCheckedChangeListener() {
+          @Override
+          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+              if (isChecked) {
+                  int userAnswer = 0;
+                  switch (buttonView.getId()) {
+                      case R.id.cb01:
+                          userAnswer = 1;
+                          break;
+                      case R.id.cb02:
+                          userAnswer = 2;
+                          break;
+                      case R.id.cb03:
+                          userAnswer = 3;
+                          break;
+                      case R.id.cb04:
+                          userAnswer = 4;
+                          break;
+                  }
+                  if (userAnswer > 0) {
+                      for (CheckBox cb : cbs) {
+                          cb.setChecked((false));
+                      }
+                      cbs[userAnswer - 1].setChecked(true);
+                  }
+              }
+          }
+    };
+
 
     public void perExam(View view) {
         showExam(biz.preQuestion());
