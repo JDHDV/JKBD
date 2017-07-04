@@ -26,14 +26,17 @@ import com.example.administrator.jkbd.biz.ExamBiz;
 import com.example.administrator.jkbd.biz.IExamBiz;
 import com.squareup.picasso.Picasso;
 
+import java.sql.Time;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Administrator on 2017/6/29.
  */
 
 public class ExamActivity extends AppCompatActivity {
-    TextView tvexif, tvextitle, tvop1, tvop2, tvop3, tvop4,tvload,tvnum;
+    TextView tvexif, tvextitle, tvop1, tvop2, tvop3, tvop4,tvload,tvnum,tvtime;
     ImageView imview;
     LinearLayout layoutloading,layout03,layout04;
     ProgressBar dialog;
@@ -94,6 +97,7 @@ public class ExamActivity extends AppCompatActivity {
              ExamInfo examInfo = ExamApplication.getInstance().getExamInfo();
              if (examInfo != null) {
                  showData(examInfo);
+                 initTimer(examInfo);
              }
                  showExam( biz.getExam());
          }
@@ -103,6 +107,40 @@ public class ExamActivity extends AppCompatActivity {
              tvload.setText("下载失败，点击重新下载！");
          }
      }
+    }
+
+    private void initTimer(ExamInfo examInfo) {
+        long sunTime=examInfo.getLimitTime()*60*1000;
+        final long overTime=sunTime+System.currentTimeMillis();
+        final Timer timer=new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                long t=overTime-System.currentTimeMillis();
+                final long min=t/1000/60;
+                final long sec=t/1000%60;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (min<10){
+                            tvtime.setText("剩余时间:0"+min+"分"+sec+"秒");
+                        }
+                    }
+                });
+            }
+        },0,1000);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                timer.cancel();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        commit(null);
+                    }
+                });
+            }
+        },sunTime);
     }
 
 
@@ -160,6 +198,7 @@ public class ExamActivity extends AppCompatActivity {
         tvop3 = (TextView) findViewById(R.id.tv_op3);
         tvop4 = (TextView) findViewById(R.id.tv_op4);
         tvload=(TextView)findViewById(R.id.tv_load);
+        tvtime= (TextView) findViewById(R.id.tv_time);
         tvnum= (TextView) findViewById(R.id.tv_examnum);
         cb01= (CheckBox) findViewById(R.id.cb01);
         cb02= (CheckBox) findViewById(R.id.cb02);
