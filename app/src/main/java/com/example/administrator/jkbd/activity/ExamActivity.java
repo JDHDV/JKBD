@@ -157,7 +157,6 @@ public class ExamActivity extends AppCompatActivity {
         },sunTime);
     }
 
-
     private void showExam(Question que) {
         if (que!= null) {
             tvnum.setText(biz.getExamIndex());
