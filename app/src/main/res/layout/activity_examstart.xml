@@ -218,6 +218,7 @@
             android:layout_below="@id/btn_next"
             android:drawableRight="@mipmap/exam_commit32x32"
             android:text="交卷"
+            android:onClick="commit"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             />
