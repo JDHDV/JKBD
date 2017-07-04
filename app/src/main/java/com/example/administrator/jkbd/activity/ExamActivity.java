@@ -122,6 +122,27 @@ public class ExamActivity extends AppCompatActivity {
             }else {
                 imview.setVisibility(View.GONE);
             }
+            resetOptions();
+            String userAnswer=que.getUserAnswer();
+            if (userAnswer!=null&&!userAnswer.equals("")){
+                int usercb=Integer.parseInt(userAnswer)-1;
+                cbs[usercb].setChecked(true);
+            }
+        }
+    }
+
+    private void saveUserAnswer() {
+        for (int i=0;i<cbs.length;i++){
+            if(cbs[i].isChecked()){
+                biz.getExam().setUserAnswer(String.valueOf(i+1));
+                return;
+            }
+        }
+    }
+
+    private void resetOptions() {
+        for(CheckBox cb:cbs){
+            cb.setChecked(false);
         }
     }
 
@@ -195,10 +216,12 @@ public class ExamActivity extends AppCompatActivity {
 
 
     public void perExam(View view) {
+        saveUserAnswer();
         showExam(biz.preQuestion());
     }
 
     public void nextExam(View view) {
+        saveUserAnswer();
         showExam(biz.nextQuestion());
     }
 

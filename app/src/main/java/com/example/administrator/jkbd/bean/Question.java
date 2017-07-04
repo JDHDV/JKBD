@@ -55,6 +55,10 @@ public class Question {
         return item1;
     }
 
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+
     public void setItem1(String item1) {
         this.item1 = item1;
     }
