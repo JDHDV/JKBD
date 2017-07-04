@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -24,6 +25,7 @@ import com.example.administrator.jkbd.bean.ExamInfo;
 import com.example.administrator.jkbd.bean.Question;
 import com.example.administrator.jkbd.biz.ExamBiz;
 import com.example.administrator.jkbd.biz.IExamBiz;
+import com.example.administrator.jkbd.view.QuestionAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.sql.Time;
@@ -43,6 +45,8 @@ public class ExamActivity extends AppCompatActivity {
     CheckBox cb01,cb02,cb03,cb04;
     CheckBox[] cbs=new CheckBox[4];
     IExamBiz biz;
+    Gallery gallery;
+    QuestionAdapter adapter;
     boolean loadisExamInfo = false;
     boolean loadisQuestion = false;
     boolean loadisExamInfoReceive = false;
@@ -98,6 +102,7 @@ public class ExamActivity extends AppCompatActivity {
              if (examInfo != null) {
                  showData(examInfo);
                  initTimer(examInfo);
+                 initGallery();
              }
                  showExam( biz.getExam());
          }
@@ -108,6 +113,12 @@ public class ExamActivity extends AppCompatActivity {
          }
      }
     }
+
+    private void initGallery() {
+        adapter=new QuestionAdapter(this);
+        gallery.setAdapter(adapter);
+    }
+
 
     private void initTimer(ExamInfo examInfo) {
         long sunTime=examInfo.getLimitTime()*60*1000;
@@ -124,6 +135,9 @@ public class ExamActivity extends AppCompatActivity {
                     public void run() {
                         if (min<10){
                             tvtime.setText("剩余时间:0"+min+"分"+sec+"秒");
+                        }
+                        if(sec<10){
+                            tvtime.setText("剩余时间:0"+min+"分"+"0"+sec+"秒");
                         }
                     }
                 });
@@ -204,6 +218,7 @@ public class ExamActivity extends AppCompatActivity {
         cb02= (CheckBox) findViewById(R.id.cb02);
         cb03= (CheckBox) findViewById(R.id.cb03);
         cb04= (CheckBox) findViewById(R.id.cb04);
+        gallery= (Gallery) findViewById(R.id.gallery);
         cbs[0]=cb01;
         cbs[1]=cb02;
         cbs[2]=cb03;
