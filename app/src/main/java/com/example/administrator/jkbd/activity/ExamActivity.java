@@ -187,9 +187,14 @@ public class ExamActivity extends AppCompatActivity {
             if (userAnswer!=null&&!userAnswer.equals("")){
                 int usercb=Integer.parseInt(userAnswer)-1;
                 cbs[usercb].setChecked(true);
+                setOptions(true);
+            }
+            else {
+                setOptions(false);
             }
         }
     }
+
 
     private void saveUserAnswer() {
         for (int i=0;i<cbs.length;i++){
@@ -276,7 +281,6 @@ public class ExamActivity extends AppCompatActivity {
                       cbs[userAnswer - 1].setChecked(true);
                   }
               }
-              saveUserAnswer();
           }
     };
 
@@ -306,6 +310,12 @@ public class ExamActivity extends AppCompatActivity {
             }
         });
         builder.create().show();
+    }
+
+    public void setOptions(boolean options) {
+        for (CheckBox cb:cbs){
+            cb.setEnabled(!options);
+        }
     }
 
     class LoadExamBroadCast extends BroadcastReceiver {
