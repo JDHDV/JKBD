@@ -46,6 +46,12 @@ public class QuestionAdapter extends BaseAdapter{
        View view= View.inflate(context, R.layout.item_que,null);
         TextView tvnum= (TextView) view.findViewById(R.id.tv_no);
         ImageView que= (ImageView) view.findViewById(R.id.img_img);
+        String userAnswer=examList.get(position).getUserAnswer();
+        if (userAnswer!=null&&!userAnswer.equals("")){
+            que.setImageResource(R.mipmap.answer24x24);
+        }else {
+            que.setImageResource(R.mipmap.ques24x24);
+        }
         tvnum.setText("第"+(position+1)+"题");
         return view;
     }
