@@ -207,8 +207,34 @@ public class ExamActivity extends AppCompatActivity {
                 int usercb = Integer.parseInt(userAnswer) - 1;
                 cbs[usercb].setChecked(true);
                 setOptions(true);
+                setAnswerTextColor(userAnswer,que.getAnswer());
             } else {
                 setOptions(false);
+                setOptionsColor();
+            }
+        }
+    }
+
+    private void setOptionsColor() {
+        for(TextView tvOp:tvs){
+            tvOp.setTextColor(getResources().getColor(R.color.black));
+        }
+    }
+
+    private void setAnswerTextColor(String userAnswer, String answer) {
+        int ra=Integer.parseInt(answer)-1;
+        for (int i=0;i<tvs.length;i++){
+            if(i==ra){
+                tvs[i].setTextColor(getResources().getColor(R.color.green));
+            }else {
+                if (!userAnswer.equals(answer)) {
+                    int ua=Integer.parseInt(userAnswer)-1;
+                    if(i==ua){
+                        tvs[i].setTextColor(getResources().getColor(R.color.red));
+                    }else {
+                        tvs[i].setTextColor(getResources().getColor(R.color.black));
+                    }
+                }
             }
         }
     }
