@@ -65,6 +65,7 @@ public class ExamActivity extends AppCompatActivity {
     @BindView(R.id.tv_op2) TextView tvop2;
     @BindView(R.id.tv_op3) TextView tvop3;
     @BindView(R.id.tv_op4) TextView tvop4;
+    @BindView(R.id.tv_daan)TextView tvdaan;
     @BindView(R.id.layout03) LinearLayout layout03;
     @BindView(R.id.layout04) LinearLayout layout04;
     @BindView(R.id.cb01) CheckBox cb01;
@@ -212,6 +213,36 @@ public class ExamActivity extends AppCompatActivity {
                 setOptions(false);
                 setOptionsColor();
             }
+
+            if(que.getUserAnswer()!=null&&!que.getUserAnswer().equals("")){
+                String answer=null;
+                switch (userAnswer){
+                    case "1":
+                        answer="A";
+                        break;
+                    case "2":
+                        answer="B";
+                        break;
+                    case "3":
+                        answer="C";
+                        break;
+                    case "4":
+                        answer="D";
+                        break;
+
+                }
+                if (que.getUserAnswer().equals(que.getAnswer())){
+                    tvdaan.setText("答案："+answer+"\n解析:"+que.getExplains().toString());
+                    tvdaan.setTextColor(getResources().getColor(R.color.green));
+                    tvdaan.setVisibility(View.VISIBLE);
+                }else {
+                    tvdaan.setText("答案："+answer+"\n解析:"+que.getExplains().toString());
+                    tvdaan.setTextColor(getResources().getColor(R.color.red));
+                    tvdaan.setVisibility(View.VISIBLE);
+                }
+            }else {
+                tvdaan.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -307,6 +338,7 @@ public class ExamActivity extends AppCompatActivity {
                     cbs[userAnswer - 1].setChecked(true);
                 }
             }
+
         }
     };
 

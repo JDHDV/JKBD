@@ -201,6 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:text="D"/>
+
             </LinearLayout>
             <Gallery
                 android:id="@+id/gallery"
@@ -208,8 +209,14 @@
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
             </Gallery>
+            <TextView
+                android:id="@+id/tv_daan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="18dp"
+                />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
